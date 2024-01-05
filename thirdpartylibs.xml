@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<libraries>
+  <library>
+    <location>js/jscolor.js</location>
+    <name>Color</name>
+    <description>Color</description>
+    <version>2.0.4</version>
+    <license></license>
+    <repository></repository>
+    <copyrights>
+      <copyright></copyright>
+    </copyrights>
+    <customised/>
+  </library>
+</libraries>
