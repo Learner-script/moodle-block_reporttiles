@@ -27,8 +27,8 @@
 function xmldb_block_reporttiles_install() {
     global $DB;
     $pluginman = core_plugin_manager::instance();
-    $reportdashboardpluginfo = $pluginman->get_plugin_info('block_reportdashboard');
-    if (is_null($reportdashboardpluginfo)) {
+    $reporttilespluginfo = $pluginman->get_plugin_info('block_reportdashboard');
+    if (is_null($reporttilespluginfo)) {
         $DB->set_field('block', 'visible', 0, ['name' => 'learnerscript']);
     } else {
         $DB->set_field('block', 'visible', 1, ['name' => 'learnerscript']);

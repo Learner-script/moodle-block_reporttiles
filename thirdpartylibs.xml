@@ -5,10 +5,22 @@
     <name>Color</name>
     <description>Color</description>
     <version>2.0.4</version>
-    <license></license>
+    <license>GPLv3</license>
     <repository></repository>
     <copyrights>
-      <copyright></copyright>
+      <copyright>Jan Odvarko</copyright>
+    </copyrights>
+    <customised/>
+  </library>
+  <library>
+    <location>js/jscolor.min.js</location>
+    <name>Color</name>
+    <description>Color</description>
+    <version>2.0.4</version>
+    <license>GPLv3</license>
+    <repository></repository>
+    <copyrights>
+      <copyright>Jan Odvarko</copyright>
     </copyrights>
     <customised/>
   </library>

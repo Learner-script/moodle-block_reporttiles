@@ -27,14 +27,14 @@ class block_reporttiles_edit_form extends block_edit_form {
      * @param object $mform Form object
      */
     protected function specific_definition($mform) {
-        global $CFG, $DB, $OUTPUT;
+        global $DB;
         $this->page->requires->js('/blocks/reporttiles/js/jscolor.js', true);
 
         // Fields for editing HTML block title and contents.
 
         $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
         $reportlist = $DB->get_records_select_menu('block_learnerscript', "global=1 AND type='statistics'", null, '', 'id,name');
-        $reportlist[0] = 'Select Report';
+        $reportlist[0] = get_string('selectreport', 'block_reporttiles');
         ksort($reportlist);
 
         $mform->addElement('text', 'config_blocktitle', get_string('blocktitle', 'block_reporttiles'));
@@ -42,8 +42,11 @@ class block_reporttiles_edit_form extends block_edit_form {
 
         $mform->addElement('select', 'config_reportlist', get_string('listofreports', 'block_reporttiles'), $reportlist);
         $mform->addElement('select', 'config_reporttype', get_string('reporttype', 'block_reporttiles'),
-            ['table' => 'Table', 'bar' => 'Bar', 'line' => 'Line', 'column' => 'Column',
-                 'pie' => 'Pie', ]);
+                ['table' => get_string('table', 'block_learnerscript'),
+                'bar' => get_string('bar', 'block_learnerscript'),
+                'line' => get_string('line', 'block_learnerscript'),
+                'column' => get_string('column', 'block_learnerscript'),
+                'pie' => get_string('pie', 'block_learnerscript'), ]);
         $durations = ['all' => get_string('all', 'block_reportdashboard'),
         'week' => get_string('week', 'block_reportdashboard'),
         'month' => get_string('month', 'block_reportdashboard'),
@@ -53,7 +56,7 @@ class block_reporttiles_edit_form extends block_edit_form {
         $properties = ['maxbytes' => 512000, 'maxfiles' => 1, 'accepted_types' => ['.jpg', '.jpeg', '.png', '.gif']];
         $mform->addElement('filemanager', 'config_logo', get_string('file'), null, $properties);
         $mform->addElement('select', 'config_tileformat', get_string('tileformat', 'block_reporttiles'),
-            ['fill' => 'Fill', 'border' => 'Border']);
+            ['fill' => get_string('fill', 'block_reporttiles'), 'border' => get_string('border', 'block_reporttiles')]);
         $tilescolourpicker = get_string('tilesbackground', 'block_reporttiles');
         $mform->addElement('text', 'config_tilescolourpicker', $tilescolourpicker,
             ['data-class' => 'jscolor', 'value' => '12445f']);

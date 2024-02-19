@@ -23,15 +23,11 @@
  */
 /**
  * This function get the reporttiles files
- * @param  object $course        Course data
- * @param  object $cm            Course module data
  * @param  object $context       Context
  * @param  string $filearea      Reporttiles fileare
  * @param  array  $args          Filepath arguments
- * @param  boolean $forcedownload Force download file
- * @param  array  $options       File options
  */
-function block_reporttiles_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
+function block_reporttiles_pluginfile($context, $filearea, $args) {
 
     if ($filearea == 'reporttiles') {
         $itemid = (int) array_shift($args);
@@ -49,7 +45,6 @@ function block_reporttiles_pluginfile($course, $cm, $context, $filearea, $args, 
         if (!$file) {
             return false;
         }
-        $filedata = $file->resize_image(200, 200);
         \core\session\manager::write_close();
         send_stored_file($file, null, 0, 1);
     }
@@ -68,6 +63,7 @@ function block_reporttiles_pluginfile($course, $cm, $context, $filearea, $args, 
 function block_reporttiles_process_css($css, $theme) {
 
     // Set custom CSS.
+    $customcss = '';
     $css = block_reporttiles_set_customcss($css, $customcss);
 
     // Define the default settings for the theme incase they've not been set.

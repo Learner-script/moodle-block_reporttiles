@@ -99,7 +99,7 @@ class block_reporttiles extends block_base {
      * Get content for reporttile block
      */
     public function get_content() {
-        global $CFG , $DB , $USER , $OUTPUT;
+        global $CFG , $DB , $OUTPUT;
         require_once($CFG->dirroot . '/blocks/reporttiles/lib.php');
 
         $output = $this->page->get_renderer('block_reporttiles');
@@ -117,18 +117,13 @@ class block_reporttiles extends block_base {
         if (in_array($themename, $themelist)) {
             $reporttileclass = $themename ? $themename."_reporttiles" : '';
         }
-        $dashboardurl = optional_param('dashboardurl', '', PARAM_TEXT);
-        if ($dashboardurl == 'Geographical') {
-            $reporttileclass .= ' geographical_tiles';
-        }
         $filteropt = new stdClass();
         $filteropt->overflowdiv = true;
         $this->content = new stdClass;
         $this->content->footer = '';
         $this->content->text = "";
 
-        if (isset($this->config->reportlist) &&
-            $this->config->reportlist &&
+        if (isset($this->config->reportlist) && $this->config->reportlist &&
             $DB->record_exists('block_learnerscript', ['id' => $this->config->reportlist, 'visible' => 1])) {
 
             $blockinstanceid = $this->instance->id;
@@ -168,6 +163,7 @@ class block_reporttiles extends block_base {
             $reportduration = (isset($this->config->reportduration) && !empty($this->config->reportduration))
                                 ? $this->config->reportduration : 'all';
             $blocktitle = !empty($this->config->blocktitle) ? $this->config->blocktitle : '';
+            $startduration = 0;
             switch ($reportduration) {
                 case 'week':
                     $startduration = strtotime("-1 week");
@@ -187,33 +183,32 @@ class block_reporttiles extends block_base {
             $reporttileformat == 'fill' ? $colorformat = "style = background:#" . $pickedcolor . ";
                             opacity:0.8" : $colorformat = "style=border-bottom:7px;
                             border-bottom-style:solid; border-bottom-color:#$pickedcolor ";
-            $helpimg = $CFG->wwwroot."/pix/help.png";
+            $helpimg = $CFG->wwwroot;
             $durations = !empty($durations) ? $durations : 0;
             $reporttiles = new \block_reporttiles\output\reporttile(
-                                                              ['styletilescolour' => $styletilescolour,
-                                                                     'tile_with_link' => $tilewithlink,
-                                                                     'instanceurlcheck' => $instanceurlcheck,
-                                                                     'tilelogo' => $logo,
-                                                                     'stylecolorpicker' => $pickedcolor,
-                                                                     'configtitle' => $configtitle,
-                                                                     'config_title_fullname' => $configtitlefullname,
-                                                                     'reportid' => $reportid,
-                                                                     'instanceid' => $blockinstanceid,
-                                                                     'loading' => $OUTPUT->image_url('loading-small',
-                                                                        'block_learnerscript'),
-                                                                      'reporttype' => $this->config->reporttype,
-                                                                      'tableformat' => $tableformat,
-                                                                      'tileformat' => $reporttileformat,
-                                                                      'colorformat' => $colorformat,
-                                                                     'helpimg' => $helpimg,
-                                                                    "durations" => $durations,
-                                                                    "startduration" => $startduration,
-                                                                    "endduration" => time(),
-                                                                    "reportduration" => ($reportduration == 'all') ? '' :
+                                                        ['styletilescolour' => $styletilescolour,
+                                                        'tile_with_link' => $tilewithlink,
+                                                        'instanceurlcheck' => $instanceurlcheck,
+                                                        'tilelogo' => $logo,
+                                                        'stylecolorpicker' => $pickedcolor,
+                                                        'configtitle' => $configtitle,
+                                                        'config_title_fullname' => $configtitlefullname,
+                                                        'reportid' => $reportid,
+                                                        'instanceid' => $blockinstanceid,
+                                                        'loading' => $OUTPUT->image_url('loading-small', 'block_learnerscript'),
+                                                        'reporttype' => $this->config->reporttype,
+                                                        'tableformat' => $tableformat,
+                                                        'tileformat' => $reporttileformat,
+                                                        'colorformat' => $colorformat,
+                                                        'helpimg' => $helpimg,
+                                                        'durations' => $durations,
+                                                        'startduration' => $startduration,
+                                                        'endduration' => time(),
+                                                        'reportduration' => ($reportduration == 'all') ? '' :
                                                                     get_string($reportduration, 'block_reportdashboard'),
-                                                                    "blocktitle" => $blocktitle,
-                                                                    'reporttileclass' => $reporttileclass, ]);
-                $this->content->text = $output->render($reporttiles);
+                                                        'blocktitle' => $blocktitle,
+                                                        'reporttileclass' => $reporttileclass, ]);
+            $this->content->text = $output->render($reporttiles);
         } else {
             $this->content->text = get_string('configurationmessage', 'block_reporttiles');
         }

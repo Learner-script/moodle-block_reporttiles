@@ -55,7 +55,6 @@ class block_reporttiles_reporttiles {
                     $isimage = $file->is_valid_image();
                     $filename = $file->get_filename();
                     $ctxid = $file->get_contextid();
-                    $component = $file->get_component();
                     $itemid = $file->get_itemid();
                     if ($isimage) {
                         $url[] = $CFG->wwwroot."/pluginfile.php/$ctxid/block_reporttiles/reporttiles/$itemid/$filename";

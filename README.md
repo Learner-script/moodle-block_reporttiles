@@ -30,7 +30,6 @@
 
 # Dependencies:
 	Learnerscript
-	Reportdashboard
 
 # Cross-DB compatibility:
 	Compatible with PGSQL, MSSQL, MYSQL and MariaDB
