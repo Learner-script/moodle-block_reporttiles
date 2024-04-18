@@ -245,3 +245,8 @@ body#page-my-index .block_reporttiles .dashboard_tiles span.dashboard_tiles_img 
 body#page-my-index .block_reporttiles .dashboard_tiles .reporttile_title {
     padding-left: 15px;
 }
+
+body#page-my-index .block_reporttiles .dashboard_reporttile_container span i ,
+body.path-blocks-reportdashboard .block_reporttiles .dashboard_reporttile_container span i {
+    float: right;
+}
