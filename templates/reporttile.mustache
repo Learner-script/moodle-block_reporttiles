@@ -17,7 +17,7 @@
 {{!
     @template block_reporttiles/reporttile
 
-    TODO describe template reporttile
+    Statistics reports information on dashboard
 
     Example context (json):
     {
@@ -54,8 +54,9 @@
                 </div>
             </div>
             <em class="ml-2 float-left">{{reportduration}}</em>
-            <img src="{{config.wwwroot}}/pix/help.png" class="float-right" id='helpimg' title='help with {{config_title_fullname}}' alt='{{#str}} help, block_reporttiles {{/str}}'
-                    onclick = '(function(e){ require("block_learnerscript/report").block_statistics_help({{reportid}}) })(event)'>
+            <span onclick='(function(e){ require("block_learnerscript/report").block_statistics_help({{reportid}}) })(event)'>
+                {{#pix}} help, core, Help with {{config_title_fullname}} {{/pix}}
+            </span>
         </div>
     </div>
     {{#instanceurlcheck}}

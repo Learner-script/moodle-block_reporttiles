@@ -22,27 +22,22 @@
  * @license   http://www.gnu.org/copyleft/gpl.reporttiles GNU GPL v3 or later
  */
 
-$string['newreporttileblock'] = 'New report tile';
-$string['pluginname'] = 'Learnerscript report tiles';
+$string['blocktitle'] = 'Block title';
+$string['border'] = 'Border';
+$string['configurationmessage'] = 'Please configure your reports';
+$string['fill'] = 'Fill';
+$string['help'] = 'Help';
 $string['listofreports'] = 'List of reports';
-$string['reportcontenttype'] = 'Report content type';
-$string['configtitle'] = 'Title';
+$string['loading'] = 'Loading';
+$string['newreporttileblock'] = 'New report tile';
+$string['pluginname'] = 'Learner Script report tiles';
+$string['privacy:metadata'] = 'The LearnerScript report tiles block only shows data stored in other locations.';
+$string['reporttile'] = 'Report tile';
+$string['reporttiles:addinstance'] = 'Add a new report tiles block';
+$string['reporttiles:myaddinstance'] = 'Add a new report tiles block to my home';
+$string['reporttype'] = 'Report type';
+$string['selectreport'] = 'Select report';
+$string['tileformat'] = 'Color format';
 $string['tilesbackground'] = 'Color';
 $string['tilestextcolour'] = 'Text color';
 $string['url'] = 'Url';
-$string['reporttile'] = 'Report tile';
-$string['writingmultirecords'] = 'Report writing more than one record';
-$string['reporttype'] = 'Report type';
-$string['configurationmessage'] = 'Please configure your reports';
-$string['tileformat'] = 'Color format';
-// Capabilities.
-$string['reporttiles:addinstance'] = 'Add a new reporttiles block';
-$string['reporttiles:myaddinstance'] = 'Add a new reporttiles block to my home';
-// Reporttiles privacy.
-$string['privacy:metadata'] = 'The LearnerScript report tiles block only shows data stored in other locations.';
-$string['blocktitle'] = 'Block title';
-$string['selectreport'] = 'Select report';
-$string['fill'] = 'Fill';
-$string['border'] = 'Border';
-$string['help'] = 'Help';
-$string['loading'] = 'Loading';
