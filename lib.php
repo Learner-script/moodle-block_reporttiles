@@ -18,7 +18,7 @@
  * Controller
  *
  * @package    block_reporttiles
- * @copyright  2023 Moodle India
+ * @copyright  2023 Moodle India Information Solutions Private Limited
  * @license    http://www.gnu.org/copyleft/gpl.reporttiles GNU GPL v3 or later
  */
 /**

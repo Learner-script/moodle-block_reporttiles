@@ -17,7 +17,7 @@
 /**
  * Report Tiles for dashboard block instances.
  * @package  block_reporttiles
- * @copyright 2023 Moodle India
+ * @copyright 2023 Moodle India Information Solutions Private Limited
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 use block_learnerscript\local\ls as ls;
@@ -60,7 +60,7 @@ class block_reporttiles extends block_base {
                                                             'blockinstanceid' => $this->instance->id,
                                                             'courseid' => $COURSE->id,
                                                             'styletilescolour' => $styletilescolour,  ], ]);
-        $this->page->requires->css('/blocks/learnerscript/css/select2.min.css');
+        $this->page->requires->css('/blocks/learnerscript/css/select2/select2.min.css');
     }
     /**
      * Displays in all applicable formats
