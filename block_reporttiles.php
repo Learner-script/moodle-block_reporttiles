@@ -60,7 +60,7 @@ class block_reporttiles extends block_base {
                                                             'blockinstanceid' => $this->instance->id,
                                                             'courseid' => $COURSE->id,
                                                             'styletilescolour' => $styletilescolour,  ], ]);
-        $this->page->requires->css('/blocks/learnerscript/css/select2.min.css');
+        $this->page->requires->css('/blocks/learnerscript/css/select2/select2.min.css');
     }
     /**
      * Displays in all applicable formats
