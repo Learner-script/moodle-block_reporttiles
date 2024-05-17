@@ -53,7 +53,6 @@ class block_reporttiles extends block_base {
         $reportlist = isset($this->config->reportlist) ? $this->config->reportlist : '';
         $reporttype = isset($this->config->reporttype) ? $this->config->reporttype : '';
         $this->page->requires->js('/blocks/reporttiles/js/jscolor.min.js');
-        $this->page->requires->js(new moodle_url('/blocks/learnerscript/js/highchart.js'));
         $this->page->requires->js_call_amd('block_learnerscript/reportwidget', 'CreateDashboardTile',
                                                [['reportid' => $reportlist,
                                                             'reporttype' => $reporttype,
