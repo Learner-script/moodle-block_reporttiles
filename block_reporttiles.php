@@ -53,7 +53,6 @@ class block_reporttiles extends block_base {
         $reportlist = isset($this->config->reportlist) ? $this->config->reportlist : '';
         $reporttype = isset($this->config->reporttype) ? $this->config->reporttype : '';
         $this->page->requires->js('/blocks/reporttiles/js/jscolor.min.js');
-        $this->page->requires->js(new moodle_url('/blocks/learnerscript/js/highchart.js'));
         $this->page->requires->js_call_amd('block_learnerscript/reportwidget', 'CreateDashboardTile',
                                                [['reportid' => $reportlist,
                                                             'reporttype' => $reporttype,
@@ -139,11 +138,11 @@ class block_reporttiles extends block_base {
             $reportid = $this->config->reportlist;
             $reportclass = $ls->create_reportclass($reportid);
             if (!empty($blockinstance->logo)) {
-                $logo = $reporttileslib->reporttiles_icon($blockinstance->logo, $this->instance->id, $reportclass->config->name);
+                $logoname = str_replace(' ', '', $reportclass->config->name);
+                $logo = $OUTPUT->image_url($logoname, 'block_reporttiles');
             } else {
                 $logo = $OUTPUT->image_url('sample_reporttile', 'block_reporttiles');
             }
-
             $report = $ls->cr_get_reportinstance($this->config->reportlist);
 
             if (isset($report) && !$report->global) {

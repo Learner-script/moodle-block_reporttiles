@@ -60,11 +60,9 @@ class block_reporttiles_edit_form extends block_edit_form {
         $tilescolourpicker = get_string('tilesbackground', 'block_reporttiles');
         $mform->addElement('text', 'config_tilescolourpicker', $tilescolourpicker,
             ['data-class' => 'jscolor', 'value' => '12445f']);
-        $mform->setType('config_tilescolourpicker', PARAM_RAW);
         $tilestextcolour = get_string('tilestextcolour', 'block_reporttiles');
         $mform->addElement('text', 'config_tilescolour', $tilestextcolour,
             ['data-class' => 'jscolor', 'value' => '000000']);
-        $mform->setType('config_tilescolour', PARAM_RAW);
 
         $mform->addElement('text', 'config_url', get_string('url', 'block_reporttiles'), ['size' => 100]);
         $mform->setType('config_url', PARAM_TEXT);
