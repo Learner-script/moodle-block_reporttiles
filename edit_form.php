@@ -41,12 +41,10 @@ class block_reporttiles_edit_form extends block_edit_form {
         $mform->setType('config_blocktitle', PARAM_TEXT);
 
         $mform->addElement('select', 'config_reportlist', get_string('listofreports', 'block_reporttiles'), $reportlist);
-        $mform->addElement('select', 'config_reporttype', get_string('reporttype', 'block_reporttiles'),
-                ['table' => get_string('table', 'block_learnerscript'),
-                'bar' => get_string('bar', 'block_learnerscript'),
-                'line' => get_string('line', 'block_learnerscript'),
-                'column' => get_string('column', 'block_learnerscript'),
-                'pie' => get_string('pie', 'block_learnerscript'), ]);
+
+        $mform->addElement('hidden', 'config_reporttype', get_string('reporttype', 'block_reporttiles'),
+        get_string('reporttype', 'block_reporttiles'));
+
         $durations = ['all' => get_string('all', 'block_reportdashboard'),
         'week' => get_string('week', 'block_reportdashboard'),
         'month' => get_string('month', 'block_reportdashboard'),
