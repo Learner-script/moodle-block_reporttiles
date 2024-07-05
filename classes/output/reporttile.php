@@ -26,7 +26,9 @@ use renderer_base;
 use templatable;
 use stdClass;
 
-/** Reporttiles */
+/**
+ * Reporttiles
+ */
 class reporttile implements renderable, templatable {
     /**
      * @var $data
