@@ -260,3 +260,7 @@ body#page-my-index .block_reporttiles .dashboard_reporttile_container .dashboard
     border-radius: 5px;
     min-height: 85px;
 }
+.block_reporttiles .dashboard_reporttile_container {
+    border-bottom: 7px;
+    border-bottom-style: solid;
+}

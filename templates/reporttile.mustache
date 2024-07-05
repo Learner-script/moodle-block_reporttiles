@@ -54,7 +54,7 @@
                 </div>
             </div>
             <em class="ml-2 float-left">{{reportduration}}</em>
-            <span onclick='(function(e){ require("block_learnerscript/report").block_statistics_help({{reportid}}) })(event)'>
+            <span class="statisticshelptext" data-reportid = {{reportid}}>
                 {{#pix}} help, core, Help with {{config_title_fullname}} {{/pix}}
             </span>
         </div>

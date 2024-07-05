@@ -179,9 +179,8 @@ class block_reporttiles extends block_base {
             }
 
             $reporttileformat = isset($this->config->tileformat) ? $this->config->tileformat : '';
-            $reporttileformat == 'fill' ? $colorformat = "style = background:#" . $pickedcolor . ";
-            opacity:0.8" :
-            $colorformat = "style=border-bottom:7px;border-bottom-style:solid;border-bottom-color:#$pickedcolor";
+            $reporttileformat == 'fill' ? $colorformat = "style = background:#" . $pickedcolor :
+            $colorformat = "style=border-bottom-color:#$pickedcolor";
             $helpimg = $CFG->wwwroot;
             $durations = !empty($durations) ? $durations : 0;
             $configtitlefullname = !empty($blocktitle) ? $blocktitle : $configtitlefullname;
