@@ -65,7 +65,7 @@ class block_reporttiles extends block_base {
      * Displays in all applicable formats
      */
     public function applicable_formats() {
-        return ['all' => true];
+        return ['site' => true, 'my' => true];
     }
     /**
      * Tile block specialization
