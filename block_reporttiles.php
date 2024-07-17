@@ -65,7 +65,9 @@ class block_reporttiles extends block_base {
      * Displays in all applicable formats
      */
     public function applicable_formats() {
-        return ['site' => true, 'my' => true];
+        if (has_capability('block/learnerscript:managereports', context_system::instance(), NULL, false)) {
+            return ['site' => true, 'my' => true];
+        }
     }
     /**
      * Tile block specialization
