@@ -65,7 +65,7 @@ class block_reporttiles extends block_base {
      * Displays in all applicable formats
      */
     public function applicable_formats() {
-        if (has_capability('block/learnerscript:managereports', context_system::instance(), NULL, false)) {
+        if (has_capability('block/learnerscript:managereports', context_system::instance(), NULL, true)) {
             return ['site' => true, 'my' => true];
         }
     }
