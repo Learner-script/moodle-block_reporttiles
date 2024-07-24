@@ -243,10 +243,24 @@ body#page-my-index .block_reporttiles .dashboard_tiles span.dashboard_tiles_img 
 }
 
 body#page-my-index .block_reporttiles .dashboard_tiles .reporttile_title {
-    padding-left: 15px;
+    font-size: 18px;
+    font-weight: 500;
+    border-left: 3px solid #000;
+    padding-left: 10px;
 }
 
 body#page-my-index .block_reporttiles .dashboard_reporttile_container span i ,
 body.path-blocks-reportdashboard .block_reporttiles .dashboard_reporttile_container span i {
     float: right;
+}
+body#page-my-index .block_reporttiles .dashboard_reporttile_container .dashboard_tiles {
+    width: 100%;
+    overflow: hidden;
+    padding: 5px 2%;
+    border-radius: 5px;
+    min-height: 85px;
+}
+.block_reporttiles .dashboard_reporttile_container {
+    border-bottom: 7px;
+    border-bottom-style: solid;
 }

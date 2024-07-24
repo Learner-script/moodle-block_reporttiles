@@ -13,12 +13,13 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Report Tiles Renderer
  *
  * @package    block_reporttiles
  * @copyright  2023 Moodle India Information Solutions Private Limited
- * @license    http://www.gnu.org/copyleft/gpl.reporttiles GNU GPL v3 or later
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_reporttiles_renderer extends plugin_renderer_base {
     /**

@@ -19,7 +19,7 @@
  *
  * @package   block_reporttiles
  * @copyright 2023 Moodle India Information Solutions Private Limited
- * @license   http://www.gnu.org/copyleft/gpl.reporttiles GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_reporttiles_edit_form extends block_edit_form {
     /**
@@ -41,12 +41,10 @@ class block_reporttiles_edit_form extends block_edit_form {
         $mform->setType('config_blocktitle', PARAM_TEXT);
 
         $mform->addElement('select', 'config_reportlist', get_string('listofreports', 'block_reporttiles'), $reportlist);
+
         $mform->addElement('select', 'config_reporttype', get_string('reporttype', 'block_reporttiles'),
-                ['table' => get_string('table', 'block_learnerscript'),
-                'bar' => get_string('bar', 'block_learnerscript'),
-                'line' => get_string('line', 'block_learnerscript'),
-                'column' => get_string('column', 'block_learnerscript'),
-                'pie' => get_string('pie', 'block_learnerscript'), ]);
+            ['table' => get_string('table', 'block_learnerscript')], ['disabled' => 'disabled']);
+
         $durations = ['all' => get_string('all', 'block_reportdashboard'),
         'week' => get_string('week', 'block_reportdashboard'),
         'month' => get_string('month', 'block_reportdashboard'),

@@ -19,7 +19,7 @@
  *
  * @package   block_reporttiles
  * @copyright 2023 Moodle India Information Solutions Private Limited
- * @license   http://www.gnu.org/copyleft/gpl.reporttiles GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 $string['blocktitle'] = 'Block title';
@@ -30,7 +30,7 @@ $string['help'] = 'Help';
 $string['listofreports'] = 'List of reports';
 $string['loading'] = 'Loading';
 $string['newreporttileblock'] = 'New report tile';
-$string['pluginname'] = 'Learner Script report tiles';
+$string['pluginname'] = 'Learnerscript report tiles';
 $string['privacy:metadata'] = 'The LearnerScript report tiles block only shows data stored in other locations.';
 $string['reporttile'] = 'Report tile';
 $string['reporttiles:addinstance'] = 'Add a new report tiles block';
