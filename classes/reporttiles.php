@@ -57,7 +57,8 @@ class block_reporttiles_reporttiles {
                     $ctxid = $file->get_contextid();
                     $itemid = $file->get_itemid();
                     if ($isimage) {
-                        $url[] = new moodle_url("/pluginfile.php/$ctxid/block_reporttiles/reporttiles/$itemid/$filename");
+                        $url[] = moodle_url::make_pluginfile_url($ctxid, 'block_reporttiles',
+                            'reporttiles', $itemid, '/', $filename)->out(false);
                     }
                 }
                 if (!empty($url[0])) {

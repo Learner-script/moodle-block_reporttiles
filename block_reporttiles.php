@@ -65,7 +65,11 @@ class block_reporttiles extends block_base {
      * Displays in all applicable formats
      */
     public function applicable_formats() {
-        return ['site' => true, 'my' => true];
+        if (is_siteadmin()) {
+            return ['site' => true, 'my' => true];
+        } else {
+            return [];
+        }
     }
     /**
      * Tile block specialization
@@ -102,7 +106,7 @@ class block_reporttiles extends block_base {
         require_once($CFG->dirroot . '/blocks/reporttiles/lib.php');
 
         $output = $this->page->get_renderer('block_reporttiles');
-        $reporttileslib = New block_reporttiles_reporttiles();
+        $reporttileslib = new block_reporttiles_reporttiles();
         $ls = new ls;
         $this->page->requires->jquery_plugin('ui-css');
         if ($this->content !== null) {
@@ -138,8 +142,7 @@ class block_reporttiles extends block_base {
             $reportid = $this->config->reportlist;
             $reportclass = $ls->create_reportclass($reportid);
             if (!empty($blockinstance->logo)) {
-                $logoname = str_replace(' ', '', $reportclass->config->name);
-                $logo = $OUTPUT->image_url($logoname, 'block_reporttiles');
+                $logo = $reporttileslib->reporttiles_icon($blockinstance->logo, $this->instance->id, $reportclass->config->name);
             } else {
                 $logo = $OUTPUT->image_url('sample_reporttile', 'block_reporttiles');
             }

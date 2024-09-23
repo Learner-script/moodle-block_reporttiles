@@ -37,7 +37,7 @@
                         <table width='100%'>
                             <tr>
                                 <div id="reportloading_{{instanceid}}">
-                                    <img src={{loading}} alt="{{#str}} loading, block_reporttiles {{/str}}" title="{{#str}} loading, block_reporttiles {{/str}}" />
+                                    {{#pix}}loading-small, block_learnerscript, {{#str}} loading, block_reporttiles {{/str}}{{/pix}}
                                 </div>
                             </tr>
                         </table>
@@ -49,13 +49,15 @@
                 {{/tableformat}}
                 <div class="col-md-5">
                     {{#tableformat}}
-                        <span class="dashboard_tiles_img"><img src="{{tilelogo}}" /></span>
+                        <span class="dashboard_tiles_img" 
+                             style='background-image: url("{{{tilelogo}}}");'>
+                        </span>
                     {{/tableformat}}
                 </div>
             </div>
             <em class="ml-2 float-left">{{reportduration}}</em>
-            <span onclick='(function(e){ require("block_learnerscript/report").block_statistics_help({{reportid}}) })(event)'>
-                {{#pix}} help, core, Help with {{config_title_fullname}} {{/pix}}
+            <span class = "reportshelptext" data-reportid = {{reportid}}>
+                {{#pix}} help, core, {{#str}} helpwith, block_reporttiles {{/str}} {{config_title_fullname}} {{/pix}}
             </span>
         </div>
     </div>

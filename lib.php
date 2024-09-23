@@ -23,15 +23,37 @@
  */
 /**
  * This function get the reporttiles files
- * @param  object $context       Context
- * @param  string $filearea      Reporttiles fileare
- * @param  array  $args          Filepath arguments
+ * @param stdClass $course course object
+ * @param stdClass $cm block instance record
+ * @param context $context context object
+ * @param string $filearea file area
+ * @param array $args extra arguments
+ * @param bool $forcedownload whether or not force download
+ * @param array $options additional options affecting the file serving
+ * @return bool
  */
-function block_reporttiles_pluginfile($context, $filearea, $args) {
-
+function block_reporttiles_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, $options = []) {
+    global $CFG, $USER;
+    if ($context->get_course_context(false)) {
+        require_course_login($course);
+    } else if ($CFG->forcelogin) {
+        require_login();
+    } else {
+        // Get parent context and see if user have proper permission.
+        $parentcontext = $context->get_parent_context();
+        if ($parentcontext->contextlevel === CONTEXT_COURSECAT) {
+            // Check if category is visible and user can view this category.
+            if (!core_course_category::get($parentcontext->instanceid, IGNORE_MISSING)) {
+                send_file_not_found();
+            }
+        } else if ($parentcontext->contextlevel === CONTEXT_USER && $parentcontext->instanceid != $USER->id) {
+            // The block is in the context of a user, it is only visible to the user who it belongs to.
+            send_file_not_found();
+        }
+        // At this point there is no way to check SYSTEM context, so ignoring it.
+    }
     if ($filearea == 'reporttiles') {
         $itemid = (int) array_shift($args);
-
         $fs = get_file_storage();
         $filename = array_pop($args);
         if (empty($args)) {
@@ -45,10 +67,16 @@ function block_reporttiles_pluginfile($context, $filearea, $args) {
         if (!$file) {
             return false;
         }
+        if ($parentcontext = context::instance_by_id($cm->parentcontextid, IGNORE_MISSING)) {
+            if ($parentcontext->contextlevel == CONTEXT_USER) {
+                $forcedownload = true;
+            }
+        } else {
+            $forcedownload = true;
+        }
         \core\session\manager::write_close();
-        send_stored_file($file, null, 0, 1);
+        send_stored_file($file, null, 0, $forcedownload, $options);
     }
-
     send_file_not_found();
 }
 /**

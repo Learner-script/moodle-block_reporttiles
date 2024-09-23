@@ -33,6 +33,7 @@ body.path-blocks-reportdashboard .block_reporttiles span.dashboard_tiles_details
 }
 
 body.path-blocks-reportdashboard .block_reporttiles span.dashboard_tiles_img {
+    background-size: cover;
     float: right;
     width: 60px;
     height: 60px;
