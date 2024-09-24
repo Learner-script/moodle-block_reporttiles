@@ -65,11 +65,7 @@ class block_reporttiles extends block_base {
      * Displays in all applicable formats
      */
     public function applicable_formats() {
-        if (is_siteadmin()) {
-            return ['site' => true, 'my' => true];
-        } else {
-            return [];
-        }
+        return ['site' => true, 'my' => true];
     }
     /**
      * Tile block specialization
