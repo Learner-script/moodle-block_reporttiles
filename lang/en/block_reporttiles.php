@@ -27,6 +27,7 @@ $string['border'] = 'Border';
 $string['configurationmessage'] = 'Please configure your reports';
 $string['fill'] = 'Fill';
 $string['help'] = 'Help';
+$string['helpwith'] = 'Help with';
 $string['listofreports'] = 'List of reports';
 $string['loading'] = 'Loading';
 $string['newreporttileblock'] = 'New report tile';

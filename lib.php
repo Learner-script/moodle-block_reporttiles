@@ -23,15 +23,37 @@
  */
 /**
  * This function get the reporttiles files
- * @param  object $context       Context
- * @param  string $filearea      Reporttiles fileare
- * @param  array  $args          Filepath arguments
+ * @param stdClass $course course object
+ * @param stdClass $cm block instance record
+ * @param context $context context object
+ * @param string $filearea file area
+ * @param array $args extra arguments
+ * @param bool $forcedownload whether or not force download
+ * @param array $options additional options affecting the file serving
+ * @return bool
  */
-function block_reporttiles_pluginfile($context, $filearea, $args) {
-
+function block_reporttiles_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, $options = []) {
+    global $CFG, $USER;
+    if ($context->get_course_context(false)) {
+        require_course_login($course);
+    } else if ($CFG->forcelogin) {
+        require_login();
+    } else {
+        // Get parent context and see if user have proper permission.
+        $parentcontext = $context->get_parent_context();
+        if ($parentcontext->contextlevel === CONTEXT_COURSECAT) {
+            // Check if category is visible and user can view this category.
+            if (!core_course_category::get($parentcontext->instanceid, IGNORE_MISSING)) {
+                send_file_not_found();
+            }
+        } else if ($parentcontext->contextlevel === CONTEXT_USER && $parentcontext->instanceid != $USER->id) {
+            // The block is in the context of a user, it is only visible to the user who it belongs to.
+            send_file_not_found();
+        }
+        // At this point there is no way to check SYSTEM context, so ignoring it.
+    }
     if ($filearea == 'reporttiles') {
         $itemid = (int) array_shift($args);
-
         $fs = get_file_storage();
         $filename = array_pop($args);
         if (empty($args)) {
@@ -45,10 +67,16 @@ function block_reporttiles_pluginfile($context, $filearea, $args) {
         if (!$file) {
             return false;
         }
+        if ($parentcontext = context::instance_by_id($cm->parentcontextid, IGNORE_MISSING)) {
+            if ($parentcontext->contextlevel == CONTEXT_USER) {
+                $forcedownload = true;
+            }
+        } else {
+            $forcedownload = true;
+        }
         \core\session\manager::write_close();
-        send_stored_file($file, null, 0, 1);
+        send_stored_file($file, null, 0, $forcedownload, $options);
     }
-
     send_file_not_found();
 }
 /**
@@ -100,4 +128,54 @@ function block_reporttiles_set_customcss($css, $customcss) {
     $css = str_replace($tag, $replacement, $css);
 
     return $css;
+}
+/**
+ * This function displays icon for reporttiles
+ * @param  int $itemid Reporttiles icon item id
+ * @param  int $blockinstanceid Reporttiles block instance id
+ * @param  int $reportname Report name to display the respective icon
+ * @return string Reprttiles logo
+ */
+function block_reporttiles_get_icon($itemid, $blockinstanceid, $reportname) {
+    global $DB, $CFG, $OUTPUT;
+    $reportname = str_replace(' ', '', $reportname);
+    $filesql = "SELECT * FROM {files} WHERE itemid = :itemid AND component = :component
+                AND filearea = :filearea AND filesize <> :filesize";
+    $file = $DB->get_record_sql($filesql, ['itemid' => $itemid,
+        'component' => 'block_reporttiles', 'filearea' => 'reporttiles', 'filesize' => 0, ]);
+    if (empty($file)) {
+        $defaultlogoexists = $CFG->dirroot . '/blocks/reporttiles/pix/' . $reportname . '.png';
+        if (file_exists($defaultlogoexists)) {
+            $defaultlogo = $OUTPUT->image_url($reportname, 'block_reporttiles');
+        } else {
+            $defaultlogo = $OUTPUT->image_url('sample_reporttile', 'block_reporttiles');
+        }
+        $logo = $defaultlogo;
+    } else {
+        $context = context_block::instance($blockinstanceid);
+        $fs = get_file_storage();
+        $files = $fs->get_area_files($context->id, 'block_reporttiles', 'reporttiles', $file->itemid, 'filename', false);
+        $url = [];
+        if (!empty($files)) {
+            foreach ($files as $file) {
+                $isimage = $file->is_valid_image();
+                $filename = $file->get_filename();
+                $ctxid = $file->get_contextid();
+                $itemid = $file->get_itemid();
+                if ($isimage) {
+                    $url[] = moodle_url::make_pluginfile_url($ctxid, 'block_reporttiles',
+                        'reporttiles', $itemid, '/', $filename)->out(false);
+                }
+            }
+            if (!empty($url[0])) {
+                $logo = $url[0];
+            } else {
+                $defaultlogo = $OUTPUT->image_url('sample_reporttile', 'block_reporttiles');
+                $logo = $defaultlogo;
+            }
+        } else {
+            return $OUTPUT->image_url('sample_reporttile', 'block_reporttiles');
+        }
+    }
+    return  $logo;
 }

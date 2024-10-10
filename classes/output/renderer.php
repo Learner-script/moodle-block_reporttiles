@@ -14,14 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace block_reporttiles\output;
+
 /**
- * Report Tiles Renderer
+ * Renderer for Learnerscript report tiles
  *
  * @package    block_reporttiles
- * @copyright  2023 Moodle India Information Solutions Private Limited
+ * @copyright  2024 Moodle India Information Solutions Private Limited
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_reporttiles_renderer extends plugin_renderer_base {
+class renderer extends \plugin_renderer_base {
     /**
      * This function displays the reporttiles/statistic reports data
      * @param object $page This page

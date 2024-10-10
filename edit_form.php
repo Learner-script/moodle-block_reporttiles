@@ -42,8 +42,7 @@ class block_reporttiles_edit_form extends block_edit_form {
 
         $mform->addElement('select', 'config_reportlist', get_string('listofreports', 'block_reporttiles'), $reportlist);
 
-        $mform->addElement('select', 'config_reporttype', get_string('reporttype', 'block_reporttiles'),
-            ['table' => get_string('table', 'block_learnerscript')], ['disabled' => 'disabled']);
+        $mform->addElement('hidden', 'config_reporttype', 'table');
 
         $durations = ['all' => get_string('all', 'block_reportdashboard'),
         'week' => get_string('week', 'block_reportdashboard'),

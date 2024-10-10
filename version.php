@@ -19,11 +19,11 @@
  *
  * @package    block_reporttiles
  * @copyright  2023 Moodle India Information Solutions Private Limited
- * @license    http://www.gnu.org/copyleft/gpl.reporttiles GNU GPL v3 or later
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2021051709;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version = 2024100400;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->component = 'block_reporttiles';      // Full name of the plugin (used for diagnostics).
 $plugin->release = 'v3.0';
 $plugin->requires = '2023041800'; // Requires this Moodle version.
