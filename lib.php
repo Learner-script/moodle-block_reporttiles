@@ -129,3 +129,53 @@ function block_reporttiles_set_customcss($css, $customcss) {
 
     return $css;
 }
+/**
+ * This function displays icon for reporttiles
+ * @param  int $itemid Reporttiles icon item id
+ * @param  int $blockinstanceid Reporttiles block instance id
+ * @param  int $reportname Report name to display the respective icon
+ * @return string Reprttiles logo
+ */
+function block_reporttiles_get_icon($itemid, $blockinstanceid, $reportname) {
+    global $DB, $CFG, $OUTPUT;
+    $reportname = str_replace(' ', '', $reportname);
+    $filesql = "SELECT * FROM {files} WHERE itemid = :itemid AND component = :component
+                AND filearea = :filearea AND filesize <> :filesize";
+    $file = $DB->get_record_sql($filesql, ['itemid' => $itemid,
+        'component' => 'block_reporttiles', 'filearea' => 'reporttiles', 'filesize' => 0, ]);
+    if (empty($file)) {
+        $defaultlogoexists = $CFG->dirroot . '/blocks/reporttiles/pix/' . $reportname.'.png';
+        if (file_exists($defaultlogoexists)) {
+            $defaultlogo = $OUTPUT->image_url($reportname, 'block_reporttiles');
+        } else {
+            $defaultlogo = $OUTPUT->image_url('sample_reporttile', 'block_reporttiles');
+        }
+        $logo = $defaultlogo;
+    } else {
+        $context = context_block::instance($blockinstanceid);
+        $fs = get_file_storage();
+        $files = $fs->get_area_files($context->id, 'block_reporttiles', 'reporttiles', $file->itemid, 'filename', false);
+        $url = [];
+        if (!empty($files)) {
+            foreach ($files as $file) {
+                $isimage = $file->is_valid_image();
+                $filename = $file->get_filename();
+                $ctxid = $file->get_contextid();
+                $itemid = $file->get_itemid();
+                if ($isimage) {
+                    $url[] = moodle_url::make_pluginfile_url($ctxid, 'block_reporttiles',
+                        'reporttiles', $itemid, '/', $filename)->out(false);
+                }
+            }
+            if (!empty($url[0])) {
+                $logo = $url[0];
+            } else {
+                $defaultlogo = $OUTPUT->image_url('sample_reporttile', 'block_reporttiles');
+                $logo = $defaultlogo;
+            }
+        } else {
+            return $OUTPUT->image_url('sample_reporttile', 'block_reporttiles');
+        }
+    }
+    return  $logo;
+}
