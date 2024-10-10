@@ -144,7 +144,7 @@ function block_reporttiles_get_icon($itemid, $blockinstanceid, $reportname) {
     $file = $DB->get_record_sql($filesql, ['itemid' => $itemid,
         'component' => 'block_reporttiles', 'filearea' => 'reporttiles', 'filesize' => 0, ]);
     if (empty($file)) {
-        $defaultlogoexists = $CFG->dirroot . '/blocks/reporttiles/pix/' . $reportname.'.png';
+        $defaultlogoexists = $CFG->dirroot . '/blocks/reporttiles/pix/' . $reportname . '.png';
         if (file_exists($defaultlogoexists)) {
             $defaultlogo = $OUTPUT->image_url($reportname, 'block_reporttiles');
         } else {
